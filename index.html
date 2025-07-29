@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Fake Hesap Mısın?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,10 +16,11 @@
       height: 100vh;
       margin: 0;
       overflow: hidden;
+      position: relative;
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       margin-bottom: 50px;
       text-align: center;
     }
@@ -40,12 +42,14 @@
     #yesBtn {
       background-color: #28a745;
       color: white;
+      z-index: 1;
     }
 
     #noBtn {
       background-color: #dc3545;
       color: white;
       position: absolute;
+      z-index: 1;
     }
 
     #message {
@@ -53,6 +57,7 @@
       font-size: 2em;
       color: #0f0;
       display: none;
+      text-align: center;
     }
   </style>
 </head>
@@ -69,12 +74,15 @@
     const yesBtn = document.getElementById("yesBtn");
     const message = document.getElementById("message");
 
-    noBtn.addEventListener("mouseover", () => {
+    function moveButton() {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
-    });
+    }
+
+    noBtn.addEventListener("mouseover", moveButton);
+    noBtn.addEventListener("touchstart", moveButton);
 
     yesBtn.addEventListener("click", () => {
       message.style.display = "block";
